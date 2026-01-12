@@ -1,11 +1,21 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import posthog from "posthog-js";
 
 const Navbar = () => {
+    const handleNavClick = (linkName: string, linkHref: string) => {
+        posthog.capture("nav_link_clicked", {
+            link_name: linkName,
+            link_href: linkHref,
+        });
+    };
+
     return (
         <header>
             <nav>
-                <Link href={"/"} className="logo">
+                <Link href={"/"} className="logo" onClick={() => handleNavClick("Logo", "/")}>
                     <Image
                         src={"/icons/logo.png"}
                         alt="logo"
@@ -15,9 +25,9 @@ const Navbar = () => {
                     <p>DevEvents</p>
                 </Link>
                 <ul>
-                    <Link href={'/'}>Home</Link>
-                    <Link href={'/events'}>Events</Link>
-                    <Link href={'/create-event'}>Create Event</Link>
+                    <Link href={'/'} onClick={() => handleNavClick("Home", "/")}>Home</Link>
+                    <Link href={'/events'} onClick={() => handleNavClick("Events", "/events")}>Events</Link>
+                    <Link href={'/create-event'} onClick={() => handleNavClick("Create Event", "/create-event")}>Create Event</Link>
                 </ul>
             </nav>
         </header>
