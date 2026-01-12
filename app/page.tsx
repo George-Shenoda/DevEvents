@@ -13,7 +13,7 @@ export default function Home() {
                 Hackathons, Meetups and Conferences, All in One Place
             </p>
             <ExploreBtn />
-            <div className="mt-20 space-y-7">
+            <div className="mt-20 space-y-7" id="events">
                 <h3>Feature Events</h3>
                 <ul className="events">
                     {events.map((event) => (
